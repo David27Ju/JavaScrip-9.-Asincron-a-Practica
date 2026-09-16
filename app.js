@@ -7,7 +7,8 @@ import {
   buscarUsuarioConAlbumesYFotos,
   filtrarPostsConComentarios,
   obtenerNombreYTelefonoUsuarios,
-  consultarYEnriquecerUsuariosCompletos
+  consultarYEnriquecerUsuariosCompletos,
+  mostrarCriteriosBusqueda
 } from "./src/modules/index.js";
 
 /**
@@ -24,15 +25,16 @@ async function iniciarMenu() {
   console.log("3. Filtrar posts por título (con comentarios)");
   console.log("4. Consultar usuarios (solo nombre y teléfono)");
   console.log("5. Petición masiva: Enriquecer usuarios completos");
+  console.log("6. Ver guía de criterios y términos de búsqueda");
   console.log("0. Salir");
   console.log("--------------------------------------------------");
 
-  const opcion = await rl.question("Seleccione una opción (0-5): ");
+  const opcion = await rl.question("Seleccione una opción (0-6): ");
   rl.close();
 
   switch (opcion.trim()) {
     case "1":
-      await listarTareasPendientes ();
+      await listarTareasPendientes();
       return iniciarMenu();
     case "2":
       await buscarUsuarioConAlbumesYFotos();
@@ -46,11 +48,14 @@ async function iniciarMenu() {
     case "5":
       await consultarYEnriquecerUsuariosCompletos();
       return iniciarMenu();
+    case "6":
+      mostrarCriteriosBusqueda();
+      return iniciarMenu();
     case "0":
       console.log("\nEjecución finalizada. ¡Hasta luego!\n");
       break;
     default:
-      console.log("\n[Opción inválida] Por favor ingrese un número entre 0 y 5.");
+      console.log("\n[Opción inválida] Por favor ingrese un número entre 0 y 6.");
       return iniciarMenu();
   }
 }
